@@ -1,0 +1,42 @@
+Stack System Status                                   Fri Sep 12 06:29:06 2008
+
+Stack member 1:
+
+Board       ID  Bay   Board Name                             Rev  Serial number
+--------------------------------------------------------------------------------
+Base       287        x900-12XT/S                            A-0  M1NB84023
+Expansion  285  Bay1  XEM-STK                                A-0  M1L17900S
+--------------------------------------------------------------------------------
+Memory:   DRAM: 514280 kB   Flash: 63.0MB Used: 27.6MB Available: 35.4MB
+--------------------------------------------------------------------------------
+Environment Status : Normal
+Uptime             : 0 days 00:25:33
+Bootloader version : 1.0.9
+
+
+Stack member 2:
+
+Board       ID  Bay   Board Name                             Rev  Serial number
+--------------------------------------------------------------------------------
+Base       287        x900-12XT/S                            A-0  M1NB8402Y
+Expansion  285  Bay1  XEM-STK                                A-0  M1L17900V
+--------------------------------------------------------------------------------
+Memory:   DRAM: 514280 kB   Flash: 63.0MB Used: 40.6MB Available: 22.4MB
+--------------------------------------------------------------------------------
+Environment Status : Normal
+Uptime             : 0 days 00:25:30
+Bootloader version : 1.0.9
+
+
+Current software   : r1-5.2.2.rel
+Software version   : 5.2.2
+Build date         : Wed Aug 6 14:06:09 NZST 2008
+
+Current boot config: flash:/cjaye.cfg (file exists)
+Territory          : europe
+
+System Name
+
+System Contact
+
+System Location

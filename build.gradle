@@ -1,0 +1,48 @@
+plugins {
+    id 'java'
+    id 'maven-publish'
+}
+
+group = 'org.saavy'
+version = '0.0.1-BETA'
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.9.1')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    implementation 'ch.ethz.ganymed:ganymed-ssh2:262'
+    implementation 'commons-beanutils:commons-beanutils:1.9.4'
+    implementation 'commons-net:commons-net:3.9.0'
+    implementation files('./libs/l2fprod-common-all.jar')
+    implementation files('./libs/ireasoningsnmp.jar')
+}
+
+test {
+    useJUnitPlatform()
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+            groupId = 'org.saavy'
+            artifactId = 'saavy-cli'
+            version = "$version"
+        }
+    }
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/blats002/SaavyCore")
+
+            credentials {
+                username = project.findProperty("USERNAME") ?: System.getenv("USERNAME")
+                password = project.findProperty("TOKEN") ?: System.getenv("TOKEN")
+            }
+        }
+    }
+}

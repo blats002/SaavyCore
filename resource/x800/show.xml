@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="windows-1250"?>
+<cli>
+  <cmd token="system">
+    <data id="stacked" condition="Stack member">
+      <composite id="cmp1" order="1" regex="(.*)">
+        <scalarset id="sysinfo" order="1" regex="Current software\s*:\s(.*?)[\r\n]+Software version\s*:\s(.*?)[\r\n]+Build date\s*:\s(.*?)[\r\n]+Current boot config\s*:\s(.*?)[\r\n]+">
+          <item id="software" group="1" order="1"/>
+          <item id="version" group="2" order="2"/>
+          <item id="builddate" group="3" order="3"/>
+          <item id="bootconfig" group="4" order="4"/>
+        </scalarset>
+        <table id="stacks" order="2" regex="(Stack member.*Bootloader version.*?[\r\n])" row="Stack member.*?Bootloader version.*?[\r\n]">
+          <composite id="stack" order="1" regex="(.*)">
+            <scalarset id="stackinfo" order="1" regex="Stack member\s*(.*?):.*?DRAM:\s*(.*?)\s+Flash:\s*(.*?)\s+Used:\s*(.*?)\s+Available:\s*(.*?)[\r\n]">
+              <item id="member" group="1" order="1"/>
+              <item id="dram" group="2" order="2"/>
+              <item id="flash" group="3" order="3"/>
+              <item id="used" group="4" order="4"/>
+              <item id="available" group="5" order="5"/>
+            </scalarset>
+            <table id="boards" order="2" regex="Serial number(.*?)Memory:" row="^\w+.*?$">
+              <scalarset id="boardinfo" order="1" regex="^([\S]+)\s+(\d+)\s+(\S*)\s+([\S]+)\s+([\S]+)\s+([\S]+)$">
+                <item id="board" group="1" order="1"/>
+                <item id="id" group="2" order="2"/>
+                <item id="bay" group="3" order="3"/>
+                <item id="name" group="4" order="4"/>
+                <item id="rev" group="5" order="5"/>
+                <item id="serial" group="6" order="6"/>
+              </scalarset>
+            </table>
+          </composite>
+        </table>
+      </composite>
+    </data>
+    <data id="unstacked" condition=".">
+      <scalarset id="sysinfo" order="1" regex="Current software\s*:\s(.*?)[\r\n]+Software version\s*:\s(.*?)[\r\n]+Build date\s*:\s(.*?)[\r\n]+Current boot config\s*:\s(.*?)[\r\n]+">
+        <item id="software" group="1" order="1"/>
+        <item id="version" group="2" order="2"/>
+        <item id="builddate" group="3" order="3"/>
+        <item id="bootconfig" group="4" order="4"/>
+      </scalarset>
+    </data>
+  </cmd>
+</cli>
