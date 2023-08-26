@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 
 public class Table extends BlockData {
 
-    private static final Logger log = Logger.getLogger("com.atlp.utility.parser.Table");
+    private static final Logger log = Logger.getLogger("org.saavy.utility.parser.Table");
     //private int type; // 1)table of scalarset 2) table of table 3) table of composite
     Vector<BlockData> table = null;
 

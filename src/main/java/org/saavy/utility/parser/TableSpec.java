@@ -6,7 +6,7 @@ import java.util.logging.Logger;
 
 public class TableSpec extends BlockSpec {
 
-    private static final Logger log = Logger.getLogger("com.atlp.utility.parser.ScalarSetSpec");
+    private static final Logger log = Logger.getLogger("org.saavy.utility.parser.ScalarSetSpec");
     private BlockSpec rowSpec;
     private String rowRegex;
 

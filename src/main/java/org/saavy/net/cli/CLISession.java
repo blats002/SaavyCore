@@ -381,7 +381,6 @@ public class CLISession implements DumbTerminalListener {
 
     public void clientClosed() {
         state = STATE.CLOSED;
-//        System.out.println("Closing AWPlus CLI Session");
         if (in != null) {
             try {
                 in.close();

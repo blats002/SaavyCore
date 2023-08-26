@@ -8,7 +8,7 @@ import java.util.logging.Logger;
 
 public class ScalarSet extends BlockData {
 
-    private final static Logger log = Logger.getLogger("com.atlp.utility.parser.ScalarSet");
+    private final static Logger log = Logger.getLogger("org.saavy.utility.parser.ScalarSet");
     private SaavyHashMap<String, ScalarItem> items;
 
     class ScalarSetComparator implements Comparator<ScalarItem> {

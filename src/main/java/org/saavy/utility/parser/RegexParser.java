@@ -28,7 +28,7 @@ public class RegexParser {
         }
         return instance;
     }
-    private static final Logger log = Logger.getLogger("com.atlp.utility.parser.RegexParser");
+    private static final Logger log = Logger.getLogger("org.saavy.utility.parser.RegexParser");
     private File xmlFile = null;
     private XMLStreamReader xmlReader = null;
     private CharSequence inputData = null;
@@ -459,7 +459,7 @@ public class RegexParser {
 //			
 //			
 //			//BlockData extract = rp.parseCommand("show system", input);
-//			rp.addScriptPath("x800", "/com/atlp/utility/parser/scripts/x800/");
+//			rp.addScriptPath("x800", "/com/saavy/utility/parser/scripts/x800/");
 //			BlockData extract = rp.parseCommand("x800","show system", input);
 //
 //

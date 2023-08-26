@@ -164,7 +164,7 @@ public abstract class SaavyBean<E extends SaavyComponentInterface, M extends Mod
         return info;
     }
 
-    public class ATLPBeanDefaultProperty extends DefaultProperty {
+    public class SaavyBeanDefaultProperty extends DefaultProperty {
         @Override
         public String toString() {
             return String.valueOf(getValue());
@@ -195,7 +195,7 @@ public abstract class SaavyBean<E extends SaavyComponentInterface, M extends Mod
     protected void setBeanInfo(BaseBeanInfo info) {
         this.info = info;
         for (PropertyDescriptor propDesc : this.info.getPropertyDescriptors()) {
-            ATLPBeanDefaultProperty prop = new ATLPBeanDefaultProperty();
+            SaavyBeanDefaultProperty prop = new SaavyBeanDefaultProperty();
             prop.setName(propDesc.getName());
             prop.setDisplayName(propDesc.getDisplayName());
             prop.setCategory(((ExtendedPropertyDescriptor) propDesc).getCategory());
