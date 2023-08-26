@@ -170,7 +170,7 @@ public class CLIStack extends CommStack<CLIHandler> {
             //throw new UnsupportedOperationException("Not supported yet.");
 //            System.out.println("Connect:" + packet.getFrom());
 
-            if (module != null && module.getATLPManager().getCommStackManager().getPoller().isForcePollersOnly()) {
+            if (module != null && module.getSaavyManager().getCommStackManager().getPoller().isForcePollersOnly()) {
                 if (/*packet.getPacketElement().hasAttribute("force") && */packet.getPacketElement().getAttribute("force", "false").equalsIgnoreCase("false")) {
                     throw new CommStackException("CLI Engine Currently down");
                 }

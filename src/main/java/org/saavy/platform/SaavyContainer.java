@@ -9,7 +9,7 @@ package org.saavy.platform;
  *
  * @author rgsaavedra
  */
-public interface ATLPContainer<E> {
+public interface SaavyContainer<E> {
     public void set(E obj);
     public void remove();
     public void logout();

@@ -17,18 +17,18 @@ import java.util.logging.Logger;
  *
  * @author rgsaavedra
  */
-public class ATLPManager {
+public class SaavyManager {
 
     private HashMap<String, Module> modules;
     private CommStackManager manager;
 
-    public ATLPManager() {
+    public SaavyManager() {
         modules = new HashMap<String, Module>();
         manager = new CommStackManager(this);
     }
 
     public void addModule(String id, Module module) {
-        module.setATLPManager(this);
+        module.setSaavyManager(this);
         module.setId(id);
         modules.put(id, module);
     }
@@ -41,7 +41,7 @@ public class ATLPManager {
         modules.remove(id).destroy();
     }
 
-    public void registerModule(SaavyElement element, Properties props, ATLPContainer obj) {
+    public void registerModule(SaavyElement element, Properties props, SaavyContainer obj) {
         String id = element.getAttribute("id");
         try {
             String clazz = element.getAttribute("class");
@@ -65,11 +65,11 @@ public class ATLPManager {
                         }
                     }
                 } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(ATLPManager.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(SaavyManager.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (IllegalAccessException ex) {
-                    Logger.getLogger(ATLPManager.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(SaavyManager.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (InstantiationException ex) {
-                    Logger.getLogger(ATLPManager.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(SaavyManager.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
 
@@ -77,7 +77,7 @@ public class ATLPManager {
 
             module.init(element, obj);
         } catch (Exception ex) {
-            Logger.getLogger(ATLPManager.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SaavyManager.class.getName()).log(Level.SEVERE, null, ex);
             removeModule(id);
         }
 

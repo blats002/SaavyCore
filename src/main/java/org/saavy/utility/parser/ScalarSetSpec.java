@@ -5,7 +5,7 @@ import java.util.logging.Logger;
 
 public class ScalarSetSpec extends BlockSpec {
 
-    private static final Logger log = Logger.getLogger("com.atlp.utility.parser.ScalarSetSpec");
+    private static final Logger log = Logger.getLogger("org.saavy.utility.parser.ScalarSetSpec");
     private Vector<ScalarItemSpec> items;
 
     public ScalarSetSpec() {

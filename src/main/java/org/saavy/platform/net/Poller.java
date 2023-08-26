@@ -5,7 +5,7 @@
 package org.saavy.platform.net;
 
 import org.saavy.dom.SaavyElement;
-import org.saavy.platform.ATLPManager;
+import org.saavy.platform.SaavyManager;
 import org.saavy.platform.Module;
 
 import java.util.ArrayList;
@@ -23,12 +23,12 @@ import java.util.logging.Logger;
 public class Poller implements Runnable {
 
     private long intervalInMillis = 30;
-    private ATLPManager manager;
+    private SaavyManager manager;
     private HashMap<String, Poll> polls;
     private ScheduledThreadPoolExecutor exec;
     private PollRun run;
 
-    public Poller(ATLPManager manager) {
+    public Poller(SaavyManager manager) {
         exec = new ScheduledThreadPoolExecutor(1);
         this.manager = manager;
         polls = new HashMap<String, Poll>();
@@ -269,7 +269,7 @@ public class Poller implements Runnable {
         if (comps.size() > 0) {
             Module module = manager.getModule(poll.getModuleID());
             for (String id : comps) {
-                if (module.getATLPComponent(id) != null && module.getATLPComponent(id).continuePoll(poll)) {
+                if (module.getSaavyComponent(id) != null && module.getSaavyComponent(id).continuePoll(poll)) {
                     return true;
                 }
             }

@@ -86,7 +86,7 @@ public class SNMPStack extends CommStack<SNMPHandler> {
             SnmpSession session = null;
             try {
 
-                if (module != null && module.getATLPManager().getCommStackManager().getPoller().isForcePollersOnly()) {
+                if (module != null && module.getSaavyManager().getCommStackManager().getPoller().isForcePollersOnly()) {
                     if (/*packet.getPacketElement().hasAttribute("force") && */packet.getPacketElement().getAttribute("force", "false").equalsIgnoreCase("false")) {
                         throw new CommStackException("SNMP  Currently down");
                     }

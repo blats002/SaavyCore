@@ -7,7 +7,7 @@ package org.saavy.platform.net;
 
 import org.saavy.dom.SaavyElement;
 import org.saavy.dom.SaavyHashMap;
-import org.saavy.platform.ATLPManager;
+import org.saavy.platform.SaavyManager;
 import org.saavy.platform.Engine;
 
 import java.util.ArrayList;
@@ -21,13 +21,13 @@ import java.util.logging.Logger;
  */
 public class CommStackManager {
 
-    private ATLPManager manager;
+    private SaavyManager manager;
     private SaavyHashMap<String, CommStack> mCommStack;
     private SaavyHashMap<String, CommStackListener> listeners;
     private SaavyHashMap<String, Poll> polls;
     private Poller poller;
 
-    public CommStackManager(ATLPManager manager) {
+    public CommStackManager(SaavyManager manager) {
         this.manager = manager;
         mCommStack = new SaavyHashMap<String, CommStack>();
         listeners = new SaavyHashMap<String, CommStackListener>();

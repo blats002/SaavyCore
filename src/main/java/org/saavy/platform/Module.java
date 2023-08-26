@@ -26,7 +26,7 @@ public abstract class Module<E extends SaavyComponentInterface> {
     private String id;
     private Properties properties;
     private Properties xmlLocation;
-    private ATLPContainer container;
+    private SaavyContainer container;
     private HashMap<String, E> components;
 
     public Module() {
@@ -34,31 +34,31 @@ public abstract class Module<E extends SaavyComponentInterface> {
     }
 
     public void invokePoll(String string) {
-        getATLPManager().getCommStackManager().getPoller().requestPoll(string);
+        getSaavyManager().getCommStackManager().getPoller().requestPoll(string);
     }
 
     public void removePolls(String cannonicalID) {
-        if (getATLPManager() != null) {
-            getATLPManager().removePolls(cannonicalID);
+        if (getSaavyManager() != null) {
+            getSaavyManager().removePolls(cannonicalID);
         }
     }
 //    protected void processSendResponse(String to,SaavyElement element){
 //        try {
 //            if (to.contains("@component")) {
-//                ATLPComponent comp = getATLPComponent(to.replaceAll("\\@component", ""));
+//                SaavyComponentInterface comp = getSaavyComponent(to.replaceAll("\\@component", ""));
 //                if (comp != null) {
 //                    comp.packetReceived(element);
 //                }
 //            } else if (to.contains("@commstack")) {
 //                element.setAttribute("module", getId());
-//                getATLPManager().getCommStackManager().sendRequest(element);
+//                getSaavyManager().getCommStackManager().sendRequest(element);
 //            } else if (to.contains("@bean")) {
-//                SaavyBean bean = getATLPBean(to.replaceAll("\\@bean", ""));
+//                SaavyBean bean = getSaavyBean(to.replaceAll("\\@bean", ""));
 //                if (bean != null) {
 //                    bean.packetReceived(element);
 //                }
 //            } else if (to.contains("@poll")) {
-//                getATLPManager().getCommStackManager().getPoller().packetReceived(element);
+//                getSaavyManager().getCommStackManager().getPoller().packetReceived(element);
 //            }
 //        } catch (Exception e) {
 //            Logger.getLogger(Module.class.toString()).log(Level.SEVERE,element.getXML(),e);
@@ -72,24 +72,24 @@ public abstract class Module<E extends SaavyComponentInterface> {
 //        processSendResponse(to, element);
         try {
             if (to.matches(".*\\@?component$")) {
-                SaavyComponentInterface comp = getATLPComponent(to.replaceAll("\\@component", ""));
+                SaavyComponentInterface comp = getSaavyComponent(to.replaceAll("\\@component", ""));
                 if (comp != null) {
                     comp.packetReceived(packet);
                 }
             } else if (to.matches(".*\\@?commstack$")) {
                 if (!getProperties().get("HOST").toString().equalsIgnoreCase("debug")) {
                     packet.getPacketElement().setAttribute("module", getId());
-                    getATLPManager().getCommStackManager().sendRequest(packet);
+                    getSaavyManager().getCommStackManager().sendRequest(packet);
                 }
             } else if (to.matches(".*\\@?commstack.hybrid$")) {
-                getATLPManager().getCommStackManager().addToHybridRequest(packet);
+                getSaavyManager().getCommStackManager().addToHybridRequest(packet);
             } else if (to.matches(".*\\@?bean$")) {
-                SaavyBean bean = getATLPBean(to.replaceAll("\\@bean", ""));
+                SaavyBean bean = getSaavyBean(to.replaceAll("\\@bean", ""));
                 if (bean != null) {
                     bean.packetReceived(packet);
                 }
             } else if (to.matches(".*\\@?poll$")) {
-                getATLPManager().getCommStackManager().getPoller().packetReceived(packet);
+                getSaavyManager().getCommStackManager().getPoller().packetReceived(packet);
             } else {
                 Logger.getLogger(Module.class.toString()).log(Level.SEVERE, "Packet Receipient(" + to + ") not found:" + packet.getPacketElement().getXML());
             }
@@ -98,11 +98,11 @@ public abstract class Module<E extends SaavyComponentInterface> {
         }
     }
 
-    public Collection<E> getAllATLPComponent() {
+    public Collection<E> getAllSaavyComponent() {
         return components.values();
     }
 
-    public E getATLPComponent(String id) {
+    public E getSaavyComponent(String id) {
         id = id.replaceAll("\\@component", "");
         try {
             if (id.contains(".")) {
@@ -121,28 +121,28 @@ public abstract class Module<E extends SaavyComponentInterface> {
     }
             
 
-    public void removeALLATLPComponents() {
+    public void removeALLSaavyComponents() {
         for (SaavyComponentInterface compnt : components.values()) {
             compnt.destroy();
         }
         components.clear();
     }
 
-    public void removeATLPComponent(String id) {
+    public void removeSaavyComponent(String id) {
         components.remove(id);
     }
 
-    public void addATLPComponent(String id, E comp) {
+    public void addSaavyComponent(String id, E comp) {
         comp.setModule(this);
         comp.setId(id);
         components.put(id, comp);
     }
 
-    public ATLPContainer getContainer() {
+    public SaavyContainer getContainer() {
         return container;
     }
 
-    public void setContainer(ATLPContainer container) {
+    public void setContainer(SaavyContainer container) {
         this.container = container;
     }
 
@@ -163,7 +163,7 @@ public abstract class Module<E extends SaavyComponentInterface> {
         this.properties = properties;
     }
 
-    public abstract void init(SaavyElement element, ATLPContainer obj);
+    public abstract void init(SaavyElement element, SaavyContainer obj);
 
     public abstract void destroy();
 
@@ -174,26 +174,26 @@ public abstract class Module<E extends SaavyComponentInterface> {
     public void setModuleProperties(Properties xmlLocation) {
         this.xmlLocation = xmlLocation;
     }
-    private ATLPManager manager;
+    private SaavyManager manager;
 
-    public void setATLPManager(ATLPManager aThis) {
+    public void setSaavyManager(SaavyManager aThis) {
         this.manager = aThis;
     }
 
-    public ATLPManager getATLPManager() {
+    public SaavyManager getSaavyManager() {
         return manager;
     }
     
-    public SaavyBean getATLPBean(String id) {
+    public SaavyBean getSaavyBean(String id) {
         id = id.replaceAll("\\@bean", "");
         Pattern pattern = Pattern.compile("(.*)\\.(\\w*)");
         Matcher matcher = pattern.matcher(id);
         if (matcher.find()) {
             String compID = matcher.group(1);
             String beanID = matcher.group(2);
-            SaavyComponentInterface comp = getATLPComponent(compID);
+            SaavyComponentInterface comp = getSaavyComponent(compID);
             if (comp != null) {
-                return comp.getATLPBean(beanID);
+                return comp.getSaavyBean(beanID);
             }
         }
         return null;

@@ -8,7 +8,7 @@ import java.util.logging.Logger;
 
 public class Composite extends BlockData {
 
-    private static final Logger log = Logger.getLogger("com.atlp.utility.parser.Composite");
+    private static final Logger log = Logger.getLogger("org.saavy.utility.parser.Composite");
     private SaavyHashMap<String, BlockData> composite;
 
     class DataBlockComparator implements Comparator<BlockData> {

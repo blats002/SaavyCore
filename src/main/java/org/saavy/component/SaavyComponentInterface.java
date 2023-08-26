@@ -26,7 +26,7 @@ public interface SaavyComponentInterface<E extends SaavyComponentInterface> {
 
     public void setModule(Module module);
     
-    public SaavyBean getATLPBean(String id);
+    public SaavyBean getSaavyBean(String id);
     
     public void subBeanUpdated(SaavyBean bean);
     
